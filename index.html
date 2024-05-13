@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="block">
+        <div class="code" id="code-1">
+            <o>from</o> microbit <o>import</o> * <br>
+            <o>import</o> music<br>
+            <o>import</o> random
+        </div>
+        <div class="desc" id="desc-1">
+            These lines tell the micro:bit what to use from the library, so it isn't confused
+            when it comes to using <c>music</c> and <c>random</c>. The top line makes sure the
+            micro:bit knows what <c>music</c> and <c>random</c> are.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code o" id="code-2">
+            <o>def</o> set_apple(ranges):<br>
+            &emsp;&emsp;aplx = random.choice(ranges)<br>
+            &emsp;&emsp;aply = random.choice(ranges)<br>
+            &emsp;&emsp;<o>return</o> aplx,aply
+        </div>
+        <div class="desc o" id="desc-2">
+            These lines set the "apple" (the less bright dot)'s positions. It gets 2 random
+            numbers, assigns them to <c>aplx</c> and <c>aply</c>, and then <c><o>return</o>
+            aplx,aply</c> lets a variable to be assigned to <c>set_apple(ranges)</c>. 
+            <c>ranges</c> is a placeholder for a list of numbers, e.g. <c>[0,1,2,3,4]</c>.
+            It does this so you don't start on the apple's position.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code" id="code-3">
+            <o>def</o> snake(lvl,speed):<br>
+            &emsp;&emsp;posx = 0<br>
+            &emsp;&emsp;posy = 0<br>
+            &emsp;&emsp;direct = <z>"R"</z><br>
+            &emsp;&emsp;apples = set_apple([1,2,3,4])
+        </div>
+        <div class="desc" id="desc-3">
+            This creates a function named <c>snake</c>, and takes in 2 values, <c>lvl</c>
+            (difficulty) and <c>speed</c>. This is a function so that it can be repeated
+            easily, and a play again function can be added. The rest is setting values for
+            the start of the game, <c>posx</c> and <c>posy</c> are reset to 0, the direction
+            that the dot goes is set to <c><z>"R"</z></c> (Right), and the first apple's position
+            is set with values of <c>[1,2,3,4]</c>, as a list of 2 values (<c>aplx</c> and 
+            <c>aply</c>).
+        </div>
+    </div>
+    <div class="block">
+        <div class="code o" id="code-4">
+            &emsp;&emsp;collected = 0<br>
+            &emsp;&emsp;goal = random.choice([5,6,7,8,9,10,11,12,13,14,15,<br>&emsp;&emsp;&emsp;&emsp;16,17,18,19,20])<br>
+            &emsp;&emsp;display.scroll(<z>"Goal: "</z> + <y>str</y>(goal))</div>
+        <div class="desc o" id="desc-4">
+            These are also lines to reset variables at the start of the game. The amount of apples
+            that the player has <c>collected</c> is reset, the amount of apples you need to win
+            (<c>goal</c>) is picked with values from <c>5</c> to <c>20</c>, and the micro:bit
+            scrolls <c><z>"Goal: "</z></c> and then the number that was picked for the goal, as
+            a string.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code" id="code-5">  
+            &emsp;&emsp;<o>while True</o>:<br>
+            &emsp;&emsp;&emsp;&emsp;<o>if</o> collected == goal:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;display.clear()<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<o>for</o> i <o>in</o> <y>range</y>(5):<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;display.show(Image.HAPPY)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sleep(500)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;display.clear()<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sleep(500)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<o>break</o></div>
+        <div class="desc" id="desc-5">
+            Here is the beginning of the main loop, which basically contains the entire game. The
+            loop starts with <c><o>while True</o>:</c>, which initiates an infinite loop until 
+            <c><o>break</o></c> is called. Once in the loop, it checks <c><o>if</o></c> the variable
+            <c>collected</c> is the same as the variable called <c>goal</c>, and if it is then it shows
+            the image named <c>HAPPY</c> for 500 milliseconds and shows a blank screen for another 500,
+            and it does this 5 times before breaking out of the loop.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code o" id="code-6">
+            &emsp;&emsp;&emsp;&emsp;<o>elif</o> posx == apples[0] <o>and</o> posy == apples[1]:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;apples = set_apple([0,1,2,3,4])<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;collected += 1
+        </div>
+        <div class="desc o" id="desc-6">
+            If <c>collected</c> does not equal <c>goal</c> but the player's position is equal
+            to the apple's position, then it resets the apple's position with the values 
+            <c>[0,1,2,3,4]</c> and adds 1 to the total of collected apples.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code" id="code-7">
+            &emsp;&emsp;&emsp;&emsp;<o>if</o> posx != 5 <o>and</o> posy != 5 <o>and</o> posy != -1 <o>and</o><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; posx != -1:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;display.clear()<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;display.set_pixel(apples[0], apples[1], 5)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;display.set_pixel(posx, posy, 9)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sleep(speed)<br>
+        </div>
+        <div class="desc" id="desc-7">
+            If the player's position does not exceed the bounds of the micro:bit screen, then
+            it clears the display, sets the apple's pixel, sets the player's pixel and pauses
+            for the speed that was taken in at the start of the <c>snake</c> function (In milliseconds).
+        </div>
+    </div>
+    <div class="block">
+        <div class="code o" id="code-8">
+            &emsp;&emsp;&emsp;&emsp;<o>if</o> button_a.was_pressed():<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<o>if</o> posx >= 2:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;direct = <z>"L"</z><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<o>else</o>:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;direct = <z>"R"</z><br>
+            &emsp;&emsp;&emsp;&emsp;<o>if</o> button_b.was_pressed():<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<o>if</o> posy >= 2:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;direct = <z>"U"</z><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<o>else</o>:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;direct = <z>"D"</z>
+        </div>
+        <div class="desc o" id="desc-8">
+            When <c>button_a</c> (The left button) was pressed, it checks <c><o>if</o></c> the current
+            horizontal position is more than or equal to <c>2</c>, and <c><o>if</o></c> it is then
+            the direction is set to <c><z>"L"</z></c> (Left), and if it isn't then the direction
+            is set to <c><z>"R"</z></c> (Right). When <c>button_b</c> (The right button) was pressed
+            it does the exact same thing, except this time with the vertical position and the values
+            of <c><z>"U"</z></c> (Up) and <c><z>"D"</z></c> (Down). The reason why it does different
+            directions depending on where the player is located is because I wanted this to work without
+            use of the pins, but still using all 4 directions.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code" id="code-9">
+            &emsp;&emsp;&emsp;&emsp;<o>if</o> direct == <z>"R"</z>:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;posx += 1<br>
+            &emsp;&emsp;&emsp;&emsp;<o>elif</o> direct == <z>"D"</z>:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;posy += 1<br>
+            &emsp;&emsp;&emsp;&emsp;<o>elif</o> direct == <z>"L"</z>:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;posx -= 1<br>
+            &emsp;&emsp;&emsp;&emsp;<o>elif</o> direct == <z>"U"</z>:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;posy -= 1
+        </div>
+        <div class="desc" id="desc-9">
+            This sets the directions to positions, and this repeats every (<c>speed</c>) milliseconds.
+            For <c><z>"R"</z></c>, it moves the horizontal position to the right for 1 pixel. For
+            <c><z>"D"</z></c>, it does the same but for the vertical and it moves it down 1 pixel.
+            For <c><z>"L"</z></c> it's horizontal and left, and finally for <c><z>"U"</z></c> it's
+            vertical and up.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code o" id="code-10">
+            &emsp;&emsp;&emsp;&emsp;<o>if</o> posx == 5 <o>and</o> lvl == 0:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;posx = 0<br>
+            &emsp;&emsp;&emsp;&emsp;<o>elif</o> posx == -1 <o>and</o> lvl == 0:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;posx = 4<br>
+            &emsp;&emsp;&emsp;&emsp;<o>elif</o> posy == 5 <o>and</o> lvl == 0:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;posy = 0<br>
+            &emsp;&emsp;&emsp;&emsp;<o>elif</o> posy == -1 <o>and</o> lvl == 0:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;posy = 4
+        </div>
+        <div class="desc o" id="desc-10">
+            These make sure the micro:bit doesn't move the player into a pixel that doesn't exist
+            by checking <c><o>if</o></c> it equals <c>-1</c> or <c>5</c>, and <c><o>if</o></c> it does
+            then it wraps around, e.g. Moving left 1 from the starting position puts it at the 5th
+            pixel from the left, at the top row. However this is only for the "Easy mode", as shown
+            by the additional check to see if the level (difficulty) is 0.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code" id="code-11">
+            &emsp;&emsp;&emsp;&emsp;<o>elif</o> posx == 5 <o>and</o> lvl == 1 <o>or</o> posx == -1 <o>and</o><br> 
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;lvl == 1 <o>or</o> posy == 5 <o>and</o> lvl == 1 <o>or</o><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;posy == -1 <o>and</o> lvl == 1:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;display.clear()<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<o>for</o> i <o>in</o> <y>range</y>(5):<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;display.show(Image.SAD)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sleep(500)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;display.clear()<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sleep(500)<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<o>break</o>
+        </div>
+        <div class="desc" id="desc-11">
+            For the harder difficulty, when you go past the boundaries of the LED array then
+            you are greeted with the <c>SAD</c> image for 500 milliseconds and a blank screen
+            for 500 milliseconds 5 times, before breaking out of the loop. This is the last part
+            of the loop, so if the criteria for this isn't met then it goes back to where
+            the <c><o>while True</o>:</c> was.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code o" id="code-12">
+            <o>def</o> choice(text):<br>
+            &emsp;&emsp;display.scroll(text)<br>
+            &emsp;&emsp;<o>while True</o>:<br>
+            &emsp;&emsp;&emsp;&emsp;display.show(Image(<z><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"00000:00000:90005:00000:00000"</z>))<br>
+            &emsp;&emsp;&emsp;&emsp;sleep(500)<br>
+            &emsp;&emsp;&emsp;&emsp;display.show(Image(<z><br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"00000:00000:50009:00000:00000"</z>))<br>
+            &emsp;&emsp;&emsp;&emsp;sleep(500)<br>
+            &emsp;&emsp;&emsp;&emsp;<o>if</o> button_a.was_pressed():<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<o>return True</o><br>
+            &emsp;&emsp;&emsp;&emsp;<o>if</o> button_b.was_pressed():<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<o>return False</o>
+        </div>
+        <div class="desc o" id="desc-12">
+            This function shows a choice screen, with 2 flashing pixels, with one being the
+            closest pixel to <c>button_a</c>, and the other being the closest pixel to
+            <c>button_b</c>. They take turns being max brightness, with 500 millisecond delays
+            in between. If <c>button_a</c> was pressed, it returns the value <c><o>True</o></c> and if 
+            <c>button_b</c> was pressed, then it returns the value <c><o>False</o></c>.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code" id="code-13">
+            <o>while True</o>:<br>
+            &emsp;&emsp;easy = choice(<z>"Easy?"</z>)<br>
+            &emsp;&emsp;<o>if</o> easy == <o>True</o>:<br>
+            &emsp;&emsp;&emsp;&emsp;snake(0,750)<br>
+            &emsp;&emsp;<o>elif</o> easy == <o>False</o>:<br>
+            &emsp;&emsp;&emsp;&emsp;snake(1,500)
+        </div>
+        <div class="desc" id="desc-13">
+            This is where the program actually starts. It begins in a loop, and first up
+            it asks the player wether they want easy difficulty or not. If yes, then it
+            runs the snake function with values of <c>0</c> and <c>750</c> for <c>lvl</c>
+            and <c>speed</c>, and if no then it does snake with values of <c>1</c> and <c>500</c>.
+        </div>
+    </div>
+    <div class="block">
+        <div class="code o" id="code-14">
+            &emsp;&emsp;sleep(1000)<br>
+            &emsp;&emsp;redid = choice(<z>"Again?"</z>)<br>
+            &emsp;&emsp;<o>if</o> redid == <o>True</o>:<br>
+            &emsp;&emsp;&emsp;&emsp;<o>easy</o> = choice(<z>"Easy?"</z>)<br>
+            &emsp;&emsp;&emsp;&emsp;<o>if</o> easy == <o>True</o>:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;snake(0,750)<br>
+            &emsp;&emsp;&emsp;&emsp;<o>elif</o> easy == <o>False</o>:<br>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;snake(1,500)<br>
+            &emsp;&emsp;<o>elif</o> redid == <o>False</o>:<br>
+            &emsp;&emsp;&emsp;&emsp;display.clear()<br>
+            &emsp;&emsp;&emsp;&emsp;<o>break</o>
+        </div>
+        <div class="desc o" id="desc-14">
+            Once the player has finished their first round of "snake", then they get the choice
+            of wether they want to go again, or if they want to stop. If they do want to go again,
+            then they repeat the process of the above block, past line 1. If they want to stop,
+            the screen is cleared and the program finally ends.
+        </div>
+    </div>
+    <!--
+    <div class="block">
+        <div class="code" id="code-15"></div>
+        <div class="desc" id="desc-15"></div>
+    </div>
+    <div class="block">
+        <div class="code o" id="code-16"></div>
+        <div class="desc o" id="desc-16"></div>
+    </div>
+    -->
+
+    <script src="index.js"></script>
+</body>
+</html>
