@@ -4,7 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>micro:bit</title>
-    <link rel="stylesheet" href="microbit.css">
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .block {
+            display: flex;
+            transition: ease-in-out 250ms;
+        }
+        .desc {
+            width: 50%;
+            padding: 20px;
+        }
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            width: 50%;
+            padding: 20px;
+        }
+        o {
+            color: orange;
+        }
+        y {
+            color: rgb(255, 88, 255);
+        }
+        z {
+            color: greenyellow;
+        }
+        c {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .o {
+            background-color: #ffffff09;
+        }
+        .block:hover {
+            background-color: #ffffff10;
+        }
+
+        #footer {
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #ffffff90;
+            padding: 10px;
+        }
+    </style>
     <link rel="icon" type="image/png" href="src/img/microbit.png" />
 </head>
 <body>
@@ -24,14 +71,14 @@
     <div class="block">
         <div class="code o" id="code-2">
             <o>def</o> set_apple(ranges):<br>
-            &#9;aplx = random.choice(ranges)<br>
+            &emsp;&emsp;aplx = random.choice(ranges)<br>
             &emsp;&emsp;aply = random.choice(ranges)<br>
             &emsp;&emsp;<o>return</o> aplx,aply
         </div>
         <div class="desc o" id="desc-2">
             These lines set the "apple" (the less bright dot)'s positions. It gets 2 random
             numbers, assigns them to <c>aplx</c> and <c>aply</c>, and then <c><o>return</o>
-            aplx,aply</c> lets a variable to be assigned to <c>set_apple(ranges)</c>. 
+            aplx,aply</c> lets a variable be assigned to <c>set_apple(ranges)</c>. 
             <c>ranges</c> is a placeholder for a list of numbers, e.g. <c>[0,1,2,3,4]</c>.
             It does this so you don't start on the apple's position.
         </div>
@@ -268,7 +315,7 @@
     </div>
     -->
     <div class="block">
-        <div class="desc o" id="footer">© 2024 Archer Albrecht. Licensed under the <a href="LICENSE" style="color:#ffffff90">Notyright Public License</a>.</div>
+        <div class="desc o" id="footer">© 2024 Archer Albrecht.</div>
     </div>
 </body>
 </html>
