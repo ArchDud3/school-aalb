@@ -288,7 +288,8 @@
             &emsp;&emsp;sleep(1000)<br>
             &emsp;&emsp;redid = choice(<z>"Again?"</z>)<br>
             &emsp;&emsp;<o>if</o> redid == <o>True</o>:<br>
-            &emsp;&emsp;&emsp;&emsp;<o>easy</o> = choice(<z>"Easy?"</z>)<br>
+            &emsp;&emsp;&emsp;&emsp;sleep(500)<br>
+            &emsp;&emsp;&emsp;&emsp;easy = choice(<z>"Easy?"</z>)<br>
             &emsp;&emsp;&emsp;&emsp;<o>if</o> easy == <o>True</o>:<br>
             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;snake(0,750)<br>
             &emsp;&emsp;&emsp;&emsp;<o>elif</o> easy == <o>False</o>:<br>
